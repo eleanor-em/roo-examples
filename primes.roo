@@ -1,7 +1,7 @@
 # Generate the integer square root of an input using Newton's method.
 procedure isqrt_rec(integer val x, integer val n, integer result)
-integer next_x;
-integer next_iter;
+    integer next_x;
+    integer next_iter;
 {
     next_x <- (x + n / x) / 2;
     if next_x = x or next_x = x + 1 then
@@ -18,10 +18,10 @@ procedure isqrt(integer val n, integer result)
 }
 
 procedure main()
-integer n;
-integer sqrt_n;
-integer x;
-boolean found_witness;
+    integer n;
+    integer sqrt_n;
+    integer x;
+    boolean found_witness;
 {
     writeln "2 is prime!";
     n <- 5;
