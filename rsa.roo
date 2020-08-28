@@ -149,11 +149,11 @@ procedure rsa_keygen(integer seed, rsa_pubkey_t pk, rsa_privkey_t sk)
 {
     call random_prime(seed, sk.p);
     call random_prime(seed, sk.q);
-    call random_coprime(seed, pk.exponent, sk.exponent);
-
     pk.modulus <- sk.p * sk.q;
     sk.modulus <- pk.modulus;
     sk.phi <- (sk.p - 1) * (sk.q - 1);
+
+    call random_coprime(seed, pk.exponent, sk.exponent, sk.phi);
 }
 
 procedure mod_pow(integer val x, integer val m, integer val pow, integer result)
