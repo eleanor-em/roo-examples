@@ -1,18 +1,17 @@
-record {
-    integer modulus;
-    integer exponent
-} rsa_pubkey_t;
-
-record {
-    integer modulus;
-    integer exponent;
-    integer p;
-    integer q;
-    integer phi
-} rsa_privkey_t;
+record
+    { integer modulus;
+    ; integer exponent
+    } rsa_pubkey_t;
+record
+    { integer modulus
+    ; integer exponent
+    ; integer p
+    ; integer q
+    ; integer phi
+    } rsa_privkey_t;
 
 # Generate the integer square root of an input using Newton's method.
-procedure isqrt_rec(integer val x, integer val n, integer result)
+procedure isqrt_rec (integer val x, integer val n, integer result)
     integer next_x;
     integer next_iter;
 {
@@ -25,13 +24,13 @@ procedure isqrt_rec(integer val x, integer val n, integer result)
 }
 
 # Convenience procedure to start Newton's method at n
-procedure isqrt(integer val n, integer result)
+procedure isqrt (integer val n, integer result)
 {
     call isqrt_rec(n, n, result);
 }
 
 # Calculate x mod n
-procedure mod(integer val x, integer val n, integer result)
+procedure mod (integer val x, integer val n, integer result)
 {
     result <- n - x / n * n;
     if result = n then
@@ -43,7 +42,7 @@ procedure mod(integer val x, integer val n, integer result)
 }
 
 # Generate a random number given `seed`, and save it back in `seed`
-procedure random(integer seed)
+procedure random (integer seed)
     integer a;
     integer b;
     integer m;
@@ -59,7 +58,7 @@ procedure random(integer seed)
 }
 
 # Check if n is prime
-procedure is_prime(integer val n, boolean result)
+procedure is_prime (integer val n, boolean result)
     integer x;
     integer sqrt_n;
     integer mod_result;
@@ -81,7 +80,7 @@ procedure is_prime(integer val n, boolean result)
 }
 
 # Get a random prime number
-procedure random_prime(integer seed, integer prime)
+procedure random_prime (integer seed, integer prime)
     integer m;
     boolean prime_result;
 {
@@ -97,7 +96,7 @@ procedure random_prime(integer seed, integer prime)
 }
 
 # Calculate gcd of a and b using the Euclidean algorithm
-procedure ext_gcd(integer val a, integer val b, integer result, integer a_inverse)
+procedure ext_gcd (integer val a, integer val b, integer result, integer a_inverse)
     integer old_r;
     integer r;
     integer old_s;
@@ -131,7 +130,7 @@ procedure ext_gcd(integer val a, integer val b, integer result, integer a_invers
 }
 
 # Get a random number coprime to n and its inverse
-procedure random_coprime(integer seed, integer result, integer inverse, integer val n)
+procedure random_coprime (integer seed, integer result, integer inverse, integer val n)
     integer gcd;
     boolean done;
 {
@@ -145,7 +144,7 @@ procedure random_coprime(integer seed, integer result, integer inverse, integer 
     od
 }
 
-procedure rsa_keygen(integer seed, rsa_pubkey_t pk, rsa_privkey_t sk)
+procedure rsa_keygen (integer seed, rsa_pubkey_t pk, rsa_privkey_t sk)
 {
     call random_prime(seed, sk.p);
     call random_prime(seed, sk.q);
@@ -156,7 +155,7 @@ procedure rsa_keygen(integer seed, rsa_pubkey_t pk, rsa_privkey_t sk)
     call random_coprime(seed, pk.exponent, sk.exponent, sk.phi);
 }
 
-procedure mod_pow(integer val x, integer val m, integer val pow, integer result)
+procedure mod_pow (integer val x, integer val m, integer val pow, integer result)
     integer base;
     integer pow';
     integer mod_result;
@@ -175,17 +174,17 @@ procedure mod_pow(integer val x, integer val m, integer val pow, integer result)
     od
 }
 
-procedure rsa_encrypt(rsa_pubkey_t pk, integer val message, integer result)
+procedure rsa_encrypt (rsa_pubkey_t pk, integer val message, integer result)
 {
     call mod_pow(message, pk.modulus, pk.exponent, result);
 }
 
-procedure rsa_decrypt(rsa_privkey_t sk, integer val ciphertext, integer result)
+procedure rsa_decrypt (rsa_privkey_t sk, integer val ciphertext, integer result)
 {
     call mod_pow(ciphertext, sk.modulus, sk.exponent, result);
 }
 
-procedure main()
+procedure main ()
     integer input;
     integer message;
     integer ciphertext;

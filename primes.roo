@@ -1,5 +1,5 @@
 # Generate the integer square root of an input using Newton's method.
-procedure isqrt_rec(integer val x, integer val n, integer result)
+procedure isqrt_rec (integer val x, integer val n, integer result)
     integer next_x;
     integer next_iter;
 {
@@ -12,12 +12,12 @@ procedure isqrt_rec(integer val x, integer val n, integer result)
 }
 
 # Convenience procedure to start Newton's method at n
-procedure isqrt(integer val n, integer result)
+procedure isqrt (integer val n, integer result)
 {
     call isqrt_rec(n, n, result);
 }
 
-procedure main()
+procedure main ()
     integer n;
     integer sqrt_n;
     integer x;

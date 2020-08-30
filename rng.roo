@@ -1,4 +1,4 @@
-procedure mod(integer val x, integer val n, integer result)
+procedure mod (integer val x, integer val n, integer result)
 {
     result <- n - x / n * n;
     if result = n then
@@ -9,7 +9,7 @@ procedure mod(integer val x, integer val n, integer result)
     od
 }
 
-procedure random(integer seed)
+procedure random (integer seed)
     integer a;
     integer b;
     integer m;
@@ -22,7 +22,7 @@ procedure random(integer seed)
     call mod(seed, m, seed);
 }
 
-procedure main()
+procedure main ()
     integer seed;
 {
     seed <- 0;
