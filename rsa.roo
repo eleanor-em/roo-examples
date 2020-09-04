@@ -1,5 +1,5 @@
 record
-    { integer modulus;
+    { integer modulus
     ; integer exponent
     } rsa_pubkey_t;
 record
