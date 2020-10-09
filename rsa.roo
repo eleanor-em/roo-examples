@@ -49,9 +49,9 @@ procedure random (integer seed)
 {
     # This is NOT cryptographically secure, and isn't claimed to be.
 
-    a <- 238351756174618923482356278561874612472147182491;
-    b <- 392596713628147537281593756182947315662938501293;
-    m <- 917237151741571310235105198610957321591035610532;
+    a <- 238351756;
+    b <- 392596713;
+    m <- 917237151;
     
     seed <- a * seed + b;
     call mod(seed, m, seed);
