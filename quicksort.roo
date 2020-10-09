@@ -47,7 +47,7 @@ procedure read_buf10 (buf10 data)
         write "Enter value ";
         write i + 1;
         write " of 10: ";
-        read buf10[i];
+        read data[i];
         i <- i + 1;
     od
 }
@@ -61,7 +61,7 @@ procedure write_buf10 (buf10 data)
         write ", ";
         i <- i + 1;
     od
-    writeln arr[9];
+    writeln data[9];
 }
 
 procedure main () 
