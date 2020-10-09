@@ -14,9 +14,9 @@ procedure random (integer seed)
     integer b;
     integer m;
 {
-    a <- 23835175617461271;
-    b <- 32851856172362136;
-    m <- 91723715174157131;
+    a <- 238351756;
+    b <- 328518561;
+    m <- 917237151;
     
     seed <- a * seed + b;
     call mod(seed, m, seed);
