@@ -72,7 +72,7 @@ procedure is_prime (integer val n, boolean result)
         result <- true;
         while result and x <= sqrt_n + 1 do
             if n / x * x = n then
-                found_witness <- false;
+                result <- false;
             fi
             x <- x + 2;
         od
