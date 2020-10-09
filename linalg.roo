@@ -95,3 +95,29 @@ procedure matrix_row_reduce (matrix a)
 	pivot <- pivot + 1;
     od
 }
+
+procedure print_matrix (matrix a)
+{
+    write "[";
+    write a[0];
+    write "\t";
+    write a[1];
+    writeln "]";
+    write "[";
+    write a[2];
+    write "\t";
+    write a[3];
+    writeln "]";
+}
+
+procedure main ()
+    matrix example;
+{
+    example[0] = 1;
+    example[1] = 2;
+    example[2] = 3;
+    example[3] = 4;
+    call print_matrix(example);
+    call matrix_row_reduce(example);
+    call print_matrix(example);
+}
