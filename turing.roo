@@ -1,0 +1,104 @@
+record
+    { integer next
+    ; integer value
+    ; boolean left
+    } delta_t;
+array[128] integer tape_t;
+array[16] delta_t transition_t;
+
+procedure main ()
+    tape_t tape;
+    transition_t on_0, on_1, on__;
+    boolean left;
+    integer n_states, q, q_a, q_r;
+    integer i, w_len;
+{
+    write "|Q| = ";
+    read n_states;
+    write "q_0 = ";
+    read q;
+    write "q_a = ";
+    read q_a;
+    write "q_r = ";
+    read q_r;
+    writeln "d(q, s) = q' s' [L|R]";
+    i <- 0;
+    while i < n_states do
+        if i != q_a and i != q_r then
+            write "d(";
+            write i;
+            write ", _) = ";
+            read on__[i].next;
+            read on__[i].value;
+            read on__[i].left;
+            write "d(";
+            write i;
+            write ", 0) = ";
+            read on_0[i].next;
+            read on_0[i].value;
+            read on_0[i].left;
+            write "d(";
+            write i;
+            write ", 1) = ";
+            read on_1[i].next;
+            read on_1[i].value;
+            read on_1[i].left;
+        fi
+        i <- i + 1;
+    od
+    write "|w| = ";
+    read w_len;
+    writeln "input w consists of 0s and 1s, anything else is reverted to 0";
+    write "w = ";
+    i <- 0;
+    while i < 128 do
+        if i < w_len then
+            read tape[i];
+            if tape[i] != 1 then
+                tape[i] <- 0;
+            fi
+        else
+            tape[i] <- -1;
+        fi
+        i <- i + 1;
+    od
+    i <- 0;
+    while q != q_a and q != q_r and q >= 0 do
+        if tape[i] = 0 then
+            left <- on_0[q].left;
+            tape[i] <- on_0[q].value;
+            q <- on_0[q].next;
+        else
+            if tape[i] = 1 then
+                left <- on_1[q].left;
+                tape[i] <- on_1[q].value;
+                q <- on_1[q].next;
+            else
+                left <- on__[q].left;
+                tape[i] <- on__[q].value;
+                q <- on__[q].next;
+            fi
+        fi
+        if left then
+            i <- i + 1;
+            if i >= 128 then
+                q <- -1;
+            fi
+        else
+            i <- i - 1;
+            if i < 0 then
+                i <- 0;
+            fi
+        fi
+    od
+    write "\n";
+    if q = q_a then
+        writeln "accept";
+    else
+        if q = q_r then
+            writeln "reject";
+        else
+            writeln "simulation error";
+        fi
+    fi
+}
