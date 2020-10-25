@@ -1,6 +1,6 @@
 procedure mod (integer val x, integer val n, integer result)
 {
-    result <- n - x / n * n;
+    result <- x - x / n * n;
     if result = n then
         result <- 0;
     fi
@@ -14,9 +14,9 @@ procedure random (integer seed)
     integer b;
     integer m;
 {
-    a <- 238351756;
-    b <- 328518561;
-    m <- 917237151;
+    a <- 233;
+    b <- 325;
+    m <- 913;
     
     seed <- a * seed + b;
     call mod(seed, m, seed);
