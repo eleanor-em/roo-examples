@@ -172,7 +172,7 @@ procedure mul (bigint_t a, bigint_t b, bigint_t result)
         while j < 40 do
             aa <- a[j];
             temp <- aa * bb + carry;
-            c[j] <- mod(temp, 10);
+            call mod(temp, 10, c[j]);
             carry <- temp / 10;
             j <- j + 1;
         od
