@@ -1,0 +1,66 @@
+array[16] integer states_t;
+
+procedure main () 
+    integer n_states, n_accepts, q;
+    states_t on_0, on_1, accepts;
+    integer w_len, i, s;
+    boolean accept;
+{   
+    write "|Q| = ";
+    read n_states;
+    write "q_0 = ";
+    read q;
+    writeln "d(q, s) = q'";
+    i <- 0;
+    while i < n_states do
+        write "d(";
+        write i;
+        write ", 0) = ";
+        read on_0[i];
+        write "d(";
+        write i;
+        write ", 1) = ";
+        read on_1[i];
+        i <- i + 1;
+    od
+    write "|F| = ";
+    read n_accepts;
+    if n_accepts > 0 then
+        write "F = ";
+        i <- 0;
+        while i < n_accepts do
+            read accepts[i];
+            i <- i + 1;
+        od
+    fi
+    write "|w| = ";
+    read w_len;
+    writeln "input w consists of 0s and 1s, anything else is reverted to 0";
+    write "w = ";
+    i <- 0;
+    while i < w_len and 0 <= q and q < n_states do
+        read s;
+        if s = 1 then
+            q <- on_1[q];
+        else 
+            q <- on_0[q];
+        fi
+        i <- i + 1;
+    od
+    if 0 <= q and q < n_states then
+        i <- 0;
+        while i < n_accepts and not accept do
+            if accepts[i] = q then
+                accept <- true;
+            fi
+            i <- i + 1;
+        od
+        if accept then
+            writeln "accept";
+        else
+            writeln "reject"; 
+        fi
+    else 
+        writeln "simulation error";
+    fi
+}
