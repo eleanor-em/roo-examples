@@ -21,6 +21,7 @@ procedure main ()
     read q_a;
     write "q_r = ";
     read q_r;
+    writeln "-1 is treated as _ (blank), 0 is treated as 0, everything else is reverted to 1";
     writeln "d(q, s) = q' s' [L|R]";
     i <- 0;
     while i < n_states do
@@ -30,32 +31,41 @@ procedure main ()
             write ", _) = ";
             read on__[i].next;
             read on__[i].value;
+            if on__[i].value != 0 and on__[i].value != -1 then
+                on__[i].value <- 1;
+            fi 
             read on__[i].left;
             write "d(";
             write i;
             write ", 0) = ";
             read on_0[i].next;
             read on_0[i].value;
+            if on_0[i].value != 0 and on_0[i].value != -1 then
+                on_0[i].value <- 1;
+            fi 
             read on_0[i].left;
             write "d(";
             write i;
             write ", 1) = ";
             read on_1[i].next;
             read on_1[i].value;
+            if on_1[i].value != 0 and on_1[i].value != -1 then
+                on_1[i].value <- 1;
+            fi 
             read on_1[i].left;
         fi
         i <- i + 1;
     od
     write "|w| = ";
     read w_len;
-    writeln "input w consists of 0s and 1s, anything else is reverted to 0";
+    writeln "input w consists of 0s and 1s, anything else is reverted to 1";
     write "w = ";
     i <- 0;
     while i < 128 do
         if i < w_len then
             read tape[i];
-            if tape[i] != 1 then
-                tape[i] <- 0;
+            if tape[i] != 0 then
+                tape[i] <- 1;
             fi
         else
             tape[i] <- -1;

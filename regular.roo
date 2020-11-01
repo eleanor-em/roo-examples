@@ -3,7 +3,7 @@ array[16] integer states_t;
 procedure main () 
     integer n_states, n_accepts, q;
     states_t on_0, on_1, accepts;
-    integer w_len, i, s;
+    integer w_len, i, s, j;
     boolean accept;
 {   
     write "|Q| = ";
@@ -29,7 +29,8 @@ procedure main ()
         write "F = ";
         i <- 0;
         while i < n_accepts do
-            read accepts[i];
+            read j;
+            accepts[j] <- 1;
             i <- i + 1;
         od
     fi
@@ -40,22 +41,15 @@ procedure main ()
     i <- 0;
     while i < w_len and 0 <= q and q < n_states do
         read s;
-        if s = 1 then
-            q <- on_1[q];
-        else 
+        if s = 0 then
             q <- on_0[q];
+        else 
+            q <- on_1[q];
         fi
         i <- i + 1;
     od
     if 0 <= q and q < n_states then
-        i <- 0;
-        while i < n_accepts and not accept do
-            if accepts[i] = q then
-                accept <- true;
-            fi
-            i <- i + 1;
-        od
-        if accept then
+        if accepts[q] = 1 then
             writeln "accept";
         else
             writeln "reject"; 
